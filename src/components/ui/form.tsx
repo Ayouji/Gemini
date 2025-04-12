@@ -121,12 +121,7 @@ const FormControl = React.forwardRef<
       aria-invalid={!!error}
       {...props}
     >
-      {/* Wrap children in a React.Fragment if it's an array */}
-      {Array.isArray(children) ? (
-        <React.Fragment>{children}</React.Fragment>
-      ) : (
-        children
-      )}
+      {children}
     </Slot>
   )
 })
@@ -183,3 +178,4 @@ export {
   FormMessage,
   FormField,
 }
+

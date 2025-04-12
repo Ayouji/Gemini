@@ -1,39 +1,39 @@
-// src/ai/flows/ai-assisted-diagnosis.ts
+// src/ai/flows/diagnosis-suggestions.ts
 'use server';
 /**
- * @fileOverview AI-assisted preliminary diagnosis flow.
+ * @fileOverview AI-powered diagnosis suggestions flow.
  *
  * This file defines a Genkit flow that takes patient symptoms and medical history as input,
  * and suggests potential diagnoses to discuss with a doctor.
  *
  * @exports {
- *   aiAssistedDiagnosis,
- *   AiAssistedDiagnosisInput,
- *   AiAssistedDiagnosisOutput
+ *   diagnosisSuggestions,
+ *   DiagnosisSuggestionsInput,
+ *   DiagnosisSuggestionsOutput
  * }
  */
 
 import {ai} from '@/ai/ai-instance';
 import {z} from 'genkit';
 
-const AiAssistedDiagnosisInputSchema = z.object({
+const DiagnosisSuggestionsInputSchema = z.object({
   symptoms: z.string().describe('The symptoms experienced by the patient.'),
   medicalHistory: z.string().describe('The medical history of the patient.'),
 });
-export type AiAssistedDiagnosisInput = z.infer<typeof AiAssistedDiagnosisInputSchema>;
+export type DiagnosisSuggestionsInput = z.infer<typeof DiagnosisSuggestionsInputSchema>;
 
-const AiAssistedDiagnosisOutputSchema = z.object({
+const DiagnosisSuggestionsOutputSchema = z.object({
   potentialDiagnoses: z.string().describe('A list of potential diagnoses to discuss with a doctor.'),
   confidenceLevel: z.number().describe('A confidence level (0-1) for the diagnoses suggested.'),
 });
-export type AiAssistedDiagnosisOutput = z.infer<typeof AiAssistedDiagnosisOutputSchema>;
+export type DiagnosisSuggestionsOutput = z.infer<typeof DiagnosisSuggestionsOutputSchema>;
 
-export async function aiAssistedDiagnosis(input: AiAssistedDiagnosisInput): Promise<AiAssistedDiagnosisOutput> {
-  return aiAssistedDiagnosisFlow(input);
+export async function diagnosisSuggestions(input: DiagnosisSuggestionsInput): Promise<DiagnosisSuggestionsOutput> {
+  return diagnosisSuggestionsFlow(input);
 }
 
-const aiAssistedDiagnosisPrompt = ai.definePrompt({
-  name: 'aiAssistedDiagnosisPrompt',
+const diagnosisSuggestionsPrompt = ai.definePrompt({
+  name: 'diagnosisSuggestionsPrompt',
   input: {
     schema: z.object({
       symptoms: z.string().describe('The symptoms experienced by the patient.'),
@@ -57,10 +57,14 @@ const aiAssistedDiagnosisPrompt = ai.definePrompt({
   `,
 });
 
-const aiAssistedDiagnosisFlow = ai.defineFlow<
-  typeof AiAssistedDiagnosisInputSchema,
-  typeof AiAssistedDiagnosisOutputSchema
->({name: 'aiAssistedDiagnosisFlow', inputSchema: AiAssistedDiagnosisInputSchema, outputSchema: AiAssistedDiagnosisOutputSchema}, async input => {
-  const {output} = await aiAssistedDiagnosisPrompt(input);
+const diagnosisSuggestionsFlow = ai.defineFlow<
+  typeof DiagnosisSuggestionsInputSchema,
+  typeof DiagnosisSuggestionsOutputSchema
+>({
+  name: 'diagnosisSuggestionsFlow',
+  inputSchema: DiagnosisSuggestionsInputSchema,
+  outputSchema: DiagnosisSuggestionsOutputSchema,
+}, async input => {
+  const {output} = await diagnosisSuggestionsPrompt(input);
   return output!;
 });

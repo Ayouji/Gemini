@@ -84,6 +84,12 @@ body {
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Apply theme colors */
+    --background: hsl(var(--light-grey));
+    --foreground: hsl(var(--calm-teal));
+    --primary: hsl(var(--calm-teal));
+    --accent: hsl(var(--soft-blue));
   }
 }
 
@@ -95,5 +101,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-

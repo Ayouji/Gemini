@@ -1,18 +1,20 @@
 'use client';
 
 import {SidebarProvider, Sidebar, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarHeader} from '@/components/ui/sidebar';
-import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
+import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import {Calendar} from '@/components/ui/calendar';
 import {Avatar, AvatarImage, AvatarFallback} from '@/components/ui/avatar';
 import {Icons} from '@/components/icons';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
+import React from 'react';
 
 export default function Home() {
   const pathname = usePathname();
   return (
     <SidebarProvider>
+      <React.Fragment>
       <div className="flex h-screen">
         <Sidebar collapsible="icon">
           <SidebarHeader className="pb-4">
@@ -28,7 +30,7 @@ export default function Home() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={pathname === "/teleconsultation"}>
-                  <Icons.messageSquare className="mr-2 h-4 w-4"/>
+                  <Icons.video className="mr-2 h-4 w-4"/>
                   <Link href="/teleconsultation">Teleconsultation</Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -61,7 +63,12 @@ export default function Home() {
         </Sidebar>
         <div className="flex-1 p-4">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl font-bold tracking-tight">Dashboard</CardTitle>
+            <div>
+              <CardTitle className="text-2xl font-bold tracking-tight">Dashboard</CardTitle>
+              <CardDescription>
+                Welcome to your telehealth hub. Manage appointments, consult with patients, and access health records.
+              </CardDescription>
+            </div>
             <div className="flex items-center space-x-4">
               <Calendar/>
               <Avatar>
@@ -96,6 +103,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      </React.Fragment>
     </SidebarProvider>
   );
 }

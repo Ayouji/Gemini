@@ -3,15 +3,19 @@
  */
 export interface Doctor {
   /**
+   * The unique identifier of the doctor.
+   */
+  id: string;
+  /**
    * The name of the doctor.
    */
   name: string;
   /**
-   * The doctor's speciality
+   * The specialisation of the doctor.
    */
-  speciality: string;
+  specialisation: string;
   /**
-   * The doctor's availability.
+   * The availability of the doctor.
    */
   availability: string[];
 }
@@ -19,21 +23,23 @@ export interface Doctor {
 /**
  * Asynchronously retrieves a list of available doctors.
  *
- * @returns A promise that resolves to a list of Doctor objects.
+ * @returns A promise that resolves to an array of Doctor objects.
  */
 export async function getAvailableDoctors(): Promise<Doctor[]> {
   // TODO: Implement this by calling an API.
 
   return [
     {
+      id: '1',
       name: 'Dr. Smith',
-      speciality: 'Cardiologist',
-      availability: ['Monday 9:00-12:00', 'Wednesday 14:00-17:00'],
+      specialisation: 'Cardiologist',
+      availability: ['Monday 9:00-17:00', 'Wednesday 9:00-17:00'],
     },
     {
-      name: 'Dr. Jones',
-      speciality: 'Dermatologist',
-      availability: ['Tuesday 10:00-13:00', 'Thursday 15:00-18:00'],
+      id: '2',
+      name: 'Dr. Johnson',
+      specialisation: 'Dermatologist',
+      availability: ['Tuesday 9:00-17:00', 'Thursday 9:00-17:00'],
     },
   ];
 }
